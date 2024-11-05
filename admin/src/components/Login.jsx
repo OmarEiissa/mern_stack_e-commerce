@@ -2,15 +2,18 @@ import axios from "axios";
 import { useState } from "react";
 import { backendUrl } from "../App";
 import { toast } from "react-toastify";
+import { BounceLoader } from "react-spinners";
 import PropTypes from "prop-types";
 
 const Login = ({ setToken }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const onSubmitHandler = async (e) => {
     e.preventDefault();
+    setLoading(true);
     try {
       const response = await axios.post(backendUrl + "/api/user/admin", {
         email,
@@ -25,11 +28,29 @@ const Login = ({ setToken }) => {
     } catch (error) {
       console.error(error);
       toast.error(error.response.data.message);
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center w-full">
+    <div className="min-h-screen flex flex-col gap-10 items-center justify-center w-full">
+      <div className="inline-flex gap-2 items-center mb-3">
+        <p className="w-8 sm:w-12 h-[1px] sm:h-[2px] bg-gray-400" />
+        <p className="text-lg text-gray-500">
+          <a
+            href="https://my-portfolio-chi-three-25.vercel.app/"
+            className="font-bold text-gray-600 hover:text-blue-500 transition-colors"
+          >
+            Contact me{" "}
+          </a>
+          for
+          <span className="font-semibold"> EMAIL</span> and
+          <span className="font-semibold"> PASSWORD</span>
+        </p>
+        <p className="w-8 sm:w-12 h-[1px] sm:h-[2px] bg-gray-400" />
+      </div>
+
       <div className="bg-white shadow-md rounded-lg px-8 py-6 max-w-md">
         <h1 className="text-2xl font-bold mb-4">Admin Panel</h1>
         <form onSubmit={onSubmitHandler}>
@@ -70,9 +91,16 @@ const Login = ({ setToken }) => {
 
           <button
             type="submit"
-            className="mt-2 w-full py-2 px-4 rounded-md text-white bg-black"
+            className={`mt-2 w-full py-2 px-4 rounded-md text-white bg-black active:scale-95 transition flex justify-center items-center ${
+              loading && "bg-gray-700 cursor-no-drop"
+            }`}
+            disabled={loading}
           >
-            Login
+            {!loading ? (
+              "Login"
+            ) : (
+              <BounceLoader color="#fff" loading={loading} size={25} />
+            )}
           </button>
         </form>
       </div>

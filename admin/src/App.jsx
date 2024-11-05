@@ -27,7 +27,10 @@ const App = () => {
     <div className="bg-gray-50 min-h-screen">
       <ToastContainer />
       {token === "" ? (
-        <Login setToken={setToken} />
+        <Routes>
+          <Route path="/" element={<Login setToken={setToken} />} />
+          <Route path="/*" element={<Navigate to="/" replace={true} />} />
+        </Routes>
       ) : (
         <>
           <Navbar setToken={setToken} />

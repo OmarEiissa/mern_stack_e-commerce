@@ -3,6 +3,7 @@ import { assets } from "../assets/assets";
 import axios from "axios";
 import { backendUrl } from "../App";
 import { toast } from "react-toastify";
+import { BounceLoader } from "react-spinners";
 import PropTypes from "prop-types";
 
 const Add = ({ token }) => {
@@ -18,9 +19,11 @@ const Add = ({ token }) => {
   const [price, setPrice] = useState("");
   const [sizes, setSizes] = useState([]);
   const [bestseller, setBestseller] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const onSubmitHandler = async (e) => {
     e.preventDefault();
+    setLoading(true);
 
     try {
       const formData = new FormData();
@@ -65,6 +68,8 @@ const Add = ({ token }) => {
     } catch (error) {
       console.log(error);
       toast.error(error.response.data.message);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -307,8 +312,17 @@ const Add = ({ token }) => {
       </div>
 
       <div>
-        <button type="submit" className="w-28 py-3 mt-4 bg-black text-white">
-          ADD
+        <button
+          type="submit"
+          className={`w-28 py-3 mt-4 bg-black text-white active:scale-95 transition flex justify-center items-center ${
+            loading && "bg-gray-700 cursor-no-drop"
+          }`}
+        >
+          {!loading ? (
+            "ADD"
+          ) : (
+            <BounceLoader color="#fff" loading={loading} size={25} />
+          )}
         </button>
       </div>
     </form>
