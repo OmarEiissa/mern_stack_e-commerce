@@ -1,8 +1,7 @@
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import { ShopContext } from "../context/ShopContext";
 import { assets } from "../assets/assets";
 import Title from "../components/Title";
-import { useEffect } from "react";
 import ProductItem from "../components/ProductItem";
 import { RotateLoader } from "react-spinners";
 
@@ -94,7 +93,7 @@ const Collection = () => {
   return (
     <div className="flex flex-col sm:flex-row gap-1 sm:gap-10 pt-10 border-t">
       {/* Left Filter Options */}
-      <div className="min-w-60">
+      <div className="min-w-60 sm:sticky sm:top-20 max-h-[calc(100vh-340px)] z-20">
         <p
           className="my-2 text-xl flex items-center cursor-pointer gap-2"
           onClick={() => setShowFilter(!showFilter)}
@@ -118,35 +117,35 @@ const Collection = () => {
               <p className="mb-3 text-sm font-medium">CATEGORIES</p>
 
               <div className="flex flex-col gap-2 text-sm font-light text-gray-700">
-                <p className="flex gap-2">
+                <label className="flex gap-2 w-fit cursor-pointer">
                   <input
                     type="checkbox"
-                    className="w-3"
+                    className="w-3 cursor-pointer"
                     value={"Men"}
                     onClick={toggleCategory}
                   />{" "}
                   Man
-                </p>
+                </label>
 
-                <p className="flex gap-2">
+                <label className="flex gap-2 w-fit cursor-pointer">
                   <input
                     type="checkbox"
-                    className="w-3"
+                    className="w-3 cursor-pointer"
                     value={"Women"}
                     onClick={toggleCategory}
                   />{" "}
                   Women
-                </p>
+                </label>
 
-                <p className="flex gap-2">
+                <label className="flex gap-2 w-fit cursor-pointer">
                   <input
                     type="checkbox"
-                    className="w-3"
+                    className="w-3 cursor-pointer"
                     value={"Kids"}
                     onClick={toggleCategory}
                   />{" "}
                   Kids
-                </p>
+                </label>
               </div>
             </div>
 
@@ -155,35 +154,35 @@ const Collection = () => {
               <p className="mb-3 text-sm font-medium">TYPE</p>
 
               <div className="flex flex-col gap-2 text-sm font-light text-gray-700">
-                <p className="flex gap-2">
+                <label className="flex gap-2 w-fit cursor-pointer">
                   <input
                     type="checkbox"
-                    className="w-3"
+                    className="w-3 cursor-pointer"
                     value={"Topwear"}
                     onClick={toggleSubCategory}
                   />
                   Topwear
-                </p>
+                </label>
 
-                <p className="flex gap-2">
+                <label className="flex gap-2 w-fit cursor-pointer">
                   <input
                     type="checkbox"
-                    className="w-3"
+                    className="w-3 cursor-pointer"
                     value={"Bottomwear"}
                     onClick={toggleSubCategory}
                   />
                   Bottomwear
-                </p>
+                </label>
 
-                <p className="flex gap-2">
+                <label className="flex gap-2 w-fit cursor-pointer">
                   <input
                     type="checkbox"
-                    className="w-3"
+                    className="w-3 cursor-pointer"
                     value={"Winterwear"}
                     onClick={toggleSubCategory}
                   />
                   Winterwear
-                </p>
+                </label>
               </div>
             </div>
           </div>
@@ -192,11 +191,11 @@ const Collection = () => {
 
       {/* Right Side */}
       <div className="flex-1">
-        <div className="flex justify-between text-base sm:text-2xl mb-4">
+        <div className="flex justify-between text-base sm:text-2xl mb-4 items-center sm:sticky sm:top-20 bg-white z-20">
           <Title text1={"ALL"} text2={"COLLECTION"} />
           {/* Product Sort */}
           <select
-            className="border-2 border-gray-300 text-sm px-2"
+            className="border-2 border-gray-300 text-sm px-2 mb-3"
             onChange={(e) => setSortType(e.target.value)}
           >
             <option value="relavent">Sort by: Relavent</option>
