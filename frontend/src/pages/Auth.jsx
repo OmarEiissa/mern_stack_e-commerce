@@ -9,12 +9,19 @@ const Auth = () => {
 
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState("");
 
   const onSubmitHandler = async (e) => {
     e.preventDefault();
     try {
       if (currentState === "Sign Up") {
+        if (password !== confirmPassword) {
+          toast.error("Passwords do not match");
+          return;
+        }
+
         const response = await axios.post(`${backendUrl}/api/user/register`, {
           name,
           email,
@@ -48,8 +55,7 @@ const Auth = () => {
     if (token) {
       navigate("/");
     }
-  }, [token,navigate])
-  
+  }, [token, navigate]);
 
   return (
     <form
@@ -79,22 +85,33 @@ const Auth = () => {
         value={email}
         onChange={(e) => setEmail(e.target.value)}
       />
-      <input
-        type="password"
-        placeholder="Password"
-        required
-        className="w-full px-3 py-2 border border-gray-800"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-      />
-      {/* {currentState === "Sign Up" && (
+      <div className="relative w-full">
         <input
-          type="password"
+          type={showPassword ? "text" : "password"}
+          placeholder="Password"
+          required
+          className="w-full px-3 py-2 border border-gray-800"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        <button
+          type="button"
+          className="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-800 outline-none"
+          onClick={() => setShowPassword(!showPassword)}
+        >
+          {showPassword ? "Hide" : "Show"}
+        </button>
+      </div>
+      {currentState === "Sign Up" && (
+        <input
+          type={showPassword ? "text" : "password"}
           placeholder="Confirmation Password"
           required
           className="w-full px-3 py-2 border border-gray-800"
+          value={confirmPassword}
+          onChange={(e) => setConfirmPassword(e.target.value)}
         />
-      )} */}
+      )}
 
       <div className="w-full flex justify-between text-sm mt-[-8px]">
         {currentState === "Sign Up" ? (
@@ -119,7 +136,6 @@ const Auth = () => {
           </p>
         )}
         <p className="cursor-pointer text-gray-600">Forgot Password?</p>
-
       </div>
 
       <button className="bg-black text-white font-light px-8 py-2 mt-4 w-full active:scale-95 transition-transform duration-300">
