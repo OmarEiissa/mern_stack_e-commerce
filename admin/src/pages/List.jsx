@@ -61,7 +61,7 @@ const List = ({ token }) => {
 
       <div className="flex flex-col gap-2 overflow-y-auto max-h-[calc(100vh-145px)]">
         {/* -------- List Table Title -------- */}
-        <div className="hidden md:grid grid-cols-[1fr_3fr_1fr_1fr_1fr] items-center py-1 px-2 border bg-gray-100 text-sm">
+        <div className="hidden md:grid grid-cols-[1fr_3fr_1fr_1fr_1fr] items-center py-1 px-2 border bg-gray-100 text-sm sticky top-0">
           <b>Image</b>
           <b>Name</b>
           <b>Category</b>
@@ -95,7 +95,11 @@ const List = ({ token }) => {
                 className="text-right md:text-center cursor-pointer text-lg"
                 onClick={() => removeProduct(item._id)}
               >
-                X
+                <img
+                  src={assets.cross_icon}
+                  alt="Cross Icon"
+                  className="inline w-3 cursor-pointer"
+                />
               </p>
             </div>
           ))

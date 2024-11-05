@@ -57,6 +57,8 @@ const Orders = ({ token }) => {
 
   useEffect(() => {
     fetchAllOrders();
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [token]);
 
   return (
