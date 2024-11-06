@@ -37,10 +37,10 @@ const Login = ({ setToken }) => {
     <div className="min-h-screen flex flex-col gap-10 items-center justify-center w-full">
       <div className="inline-flex gap-2 items-center mb-3">
         <p className="w-8 sm:w-12 h-[1px] sm:h-[2px] bg-gray-400" />
-        <p className="text-lg text-gray-500">
+        <p className="text-sm sm:text-lg text-gray-500">
           <a
             href="https://my-portfolio-chi-three-25.vercel.app/"
-            className="font-bold text-gray-600 hover:text-blue-500 transition-colors"
+            className="font-bold text-blue-500 hover:text-blue-700 transition-colors"
           >
             Contact me{" "}
           </a>
