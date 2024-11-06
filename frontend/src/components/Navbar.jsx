@@ -18,7 +18,7 @@ const Navbar = () => {
   };
 
   return (
-    <div className="flex items-center justify-between py-5 font-medium sm:sticky sm:top-0 bg-white z-30">
+    <div className="flex items-center justify-between py-5 font-medium sticky top-0 w-full bg-white z-30">
       <Link to="/">
         <img src={assets.logo} alt="Logo" className="w-32 md:w-36" />
       </Link>

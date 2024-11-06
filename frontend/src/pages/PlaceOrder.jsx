@@ -5,6 +5,7 @@ import Title from "../components/Title";
 import { ShopContext } from "../context/ShopContext";
 import { toast } from "react-toastify";
 import axios from "axios";
+import { BounceLoader } from "react-spinners";
 
 const PlaceOrder = () => {
   const [method, setMethod] = useState("cod");
@@ -30,6 +31,7 @@ const PlaceOrder = () => {
     country: "",
     phone: "",
   });
+  const [loading, setLoading] = useState(false);
 
   const onChangeHandler = (e) => {
     const name = e.target.name;
@@ -40,6 +42,7 @@ const PlaceOrder = () => {
 
   const onSubmitHandler = async (e) => {
     e.preventDefault();
+    setLoading(true);
 
     try {
       let orderItems = [];
@@ -109,6 +112,8 @@ const PlaceOrder = () => {
     } catch (error) {
       console.log(error);
       toast.error(error.response.data.message);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -273,12 +278,17 @@ const PlaceOrder = () => {
           </div>
 
           <div className="w-full text-end mt-8">
-            <button
-              className="bg-black text-white px-16 py-3 text-sm w-full"
-              type="submit"
-            >
-              PLACE ORDER
-            </button>
+          <button
+        className={`w-full py-2 px-8 mt-4 bg-black text-white font-light active:scale-95 transition flex justify-center items-center ${
+          loading && "bg-gray-700 cursor-no-drop"
+        }`}
+      >
+        {!loading ? (
+          "PLACE ORDER"
+        ) : (
+          <BounceLoader color="#fff" loading={loading} size={25} />
+        )}
+      </button>
           </div>
         </div>
       </div>

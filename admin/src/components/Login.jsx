@@ -27,7 +27,7 @@ const Login = ({ setToken }) => {
       }
     } catch (error) {
       console.error(error);
-      toast.error(error.response.data.message);
+      toast.error(error.message);
     } finally {
       setLoading(false);
     }
@@ -99,7 +99,7 @@ const Login = ({ setToken }) => {
             {!loading ? (
               "Login"
             ) : (
-              <BounceLoader color="#fff" loading={loading} size={25} />
+              <BounceLoader color="#fff" loading={loading} size={20} />
             )}
           </button>
         </form>

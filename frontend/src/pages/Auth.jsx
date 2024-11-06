@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { ShopContext } from "../context/ShopContext";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { BounceLoader } from "react-spinners";
 
 const Auth = () => {
   const [currentState, setCurrentState] = useState("Login");
@@ -12,9 +13,11 @@ const Auth = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const onSubmitHandler = async (e) => {
     e.preventDefault();
+    setLoading(true);
     try {
       if (currentState === "Sign Up") {
         if (password !== confirmPassword) {
@@ -138,8 +141,20 @@ const Auth = () => {
         <p className="cursor-pointer text-gray-600">Forgot Password?</p>
       </div>
 
-      <button className="bg-black text-white font-light px-8 py-2 mt-4 w-full active:scale-95 transition-transform duration-300">
-        {currentState === "Login" ? "Login" : "Sign Up"}
+      <button
+        className={`w-full py-2 px-8 mt-4 bg-black text-white font-light active:scale-95 transition flex justify-center items-center ${
+          loading && "bg-gray-700 cursor-no-drop"
+        }`}
+      >
+        {!loading ? (
+          currentState === "Login" ? (
+            "Login"
+          ) : (
+            "Sign Up"
+          )
+        ) : (
+          <BounceLoader color="#fff" loading={loading} size={25} />
+        )}
       </button>
     </form>
   );
