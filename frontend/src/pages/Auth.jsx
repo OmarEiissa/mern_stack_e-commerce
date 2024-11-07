@@ -51,6 +51,8 @@ const Auth = () => {
     } catch (error) {
       console.log(error);
       toast.error(error.response.data.message);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -116,7 +118,7 @@ const Auth = () => {
         />
       )}
 
-      <div className="w-full flex justify-between text-sm mt-[-8px]">
+      <div className="w-full flex justify-between text-sm mt-[-8px] flex-col sm:flex-row gap-2">
         {currentState === "Sign Up" ? (
           <p className="text-gray-600">
             Already have an account?{" "}

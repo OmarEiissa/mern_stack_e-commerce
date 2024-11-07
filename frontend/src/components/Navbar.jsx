@@ -18,7 +18,7 @@ const Navbar = () => {
   };
 
   return (
-    <div className="flex items-center justify-between py-5 font-medium sticky top-0 w-full bg-white z-30">
+    <div className="flex items-center justify-between py-5 font-medium sm:sticky top-0 w-full bg-white z-30">
       <Link to="/">
         <img src={assets.logo} alt="Logo" className="w-32 md:w-36" />
       </Link>
@@ -109,7 +109,7 @@ const Navbar = () => {
 
       {/* Sidebar menu for small screen */}
       <div
-        className={`absolute top-0 right-0 bottom-0 overflow-hidden bg-white transition-all ${
+        className={`absolute top-0 right-0 bottom-0 overflow-hidden bg-white transition-all z-40 ${
           visible ? "w-full" : "w-0"
         }`}
       >

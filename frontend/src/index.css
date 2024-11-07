@@ -77,7 +77,7 @@ a.active hr {
   -moz-appearance: textfield;
 } */
 
-@media (max-width: 636px) {
+@media (max-width: 639.5px) {
   a.active {
     background-color: #000;
     color: #fff;

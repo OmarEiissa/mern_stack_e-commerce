@@ -23,6 +23,21 @@ const Add = ({ token }) => {
 
   const onSubmitHandler = async (e) => {
     e.preventDefault();
+
+    if (!image1 && !image2 && !image3 && !image4) {
+      toast.error(
+        "Please upload at least one image to add a product to the store."
+      );
+      return;
+    }
+
+    if (sizes.length === 0) {
+      toast.error(
+        "Please select at least one size to add a product to the store."
+      );
+      return;
+    }
+
     setLoading(true);
 
     try {
@@ -75,7 +90,7 @@ const Add = ({ token }) => {
 
   return (
     <form
-      className="flex flex-col w-full items-start gap-3"
+      className="flex flex-col w-full items-start gap-3 overflow-y-auto max-h-[calc(100vh-70px)] pb-3 pr-3"
       onSubmit={onSubmitHandler}
     >
       <div>
